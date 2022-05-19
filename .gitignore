@@ -1,0 +1,17 @@
+# .gitignore
+
+# Don't commit these CircuitPython files to git:
+boot_out.txt
+secrets.py
+.Trashes
+.fseventsd/
+.metadata_never_index
+
+# Other cruft to keep out of git repos:
+__pycache__/
+HIDE/
+*.log
+*.swp
+*~
+
+# eof
