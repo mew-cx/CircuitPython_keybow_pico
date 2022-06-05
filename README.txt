@@ -11,3 +11,8 @@ git checkout -f keybow_pico
 ::::::::::::::
 gitdir: C:/mew/tmp/dust_runtime_KEYBOW.git
 
+
+::::::::::::::
+references
+::::::::::::::
+https://docs.circuitpython.org/en/latest/shared-bindings/keypad/index.html
