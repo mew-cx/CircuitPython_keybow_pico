@@ -18,11 +18,10 @@ def random_color():
     #return random.randrange(0,8) << 5
     return random.randrange(0,256)
 
+@atexit.register
 def clear():
     for dot in range(n_dots):
         dots[dot] = (0,0,0)
-
-atexit.register(clear)
 
 while True:
     for dot in range(n_dots):
