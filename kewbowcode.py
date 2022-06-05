@@ -26,28 +26,16 @@ class KeyLight:
         self.press_string = press_string
         self.press_func = press_func
         self.pressed = False
-        self.set_base_color((self.keynum*20, 0, 255-(self.keynum*20), 0.5))
         self.pin = digitalio.DigitalInOut(self.pinnum)
         self.pin.switch_to_input(pull = digitalio.Pull.UP)
+        self.base_color = (self.keynum*20, 0, 255-(self.keynum*20), 0.5)
+        self.set_pixel(self.base_color)
 
     def set_pixel(self,color):
         pixels[self.lednum] = color
 
     def get_pixel(self):
         return pixels[self.lednum]
-
-    def set_base_color(self,color):
-        self.base_color = color
-        self.set_pixel(color)
-
-    def key_pressed(self):
-        self.pressed = True
-
-    def key_was_pressed(self):
-        return self.pressed
-
-    def key_released(self):
-        self.pressed = False
 
     def key_down(self):
         return self.pin.value == False
@@ -78,18 +66,17 @@ keyArray.append( KeyLight( 10, board.GP17, 4,  "Ten", None))
 keyArray.append( KeyLight( 11, board.GP14, 8,  "Eleven", None))
 
 while True:
-    keydown = False
     for k in keyArray:
         if k.key_down():
-            if not k.key_was_pressed():
+            if not k.pressed:
+                k.pressed = True
                 k.set_pixel((255,255,255,0.5))
-                k.key_pressed()
                 if k.press_func:
                     k.press_func(kbd,layout)
                 else:
                     layout.write(k.press_string)
             else:
-                pass # held down behaviour here
-        elif k.key_was_pressed():
-                k.key_released()
+                pass    # held down behaviour here
+        elif k.pressed:
+                k.pressed = False
                 k.set_pixel(k.base_color)
