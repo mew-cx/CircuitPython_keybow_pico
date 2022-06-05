@@ -11,9 +11,4 @@ def is_hardware_spi(clock_pin, data_pin):
     except ValueError:
         return False
 
-
-# Provide the two pins you intend to use.
-if is_hardware_spi(board.A1, board.A2):
-    print("This pin combination is hardware SPI!")
-else:
-    print("This pin combination isn't hardware SPI.")
+print("is_hardware_spi(board.SCK, board.MOSI):", is_hardware_spi(board.SCK, board.MOSI))
