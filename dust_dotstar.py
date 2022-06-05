@@ -1,31 +1,30 @@
+# dust_dotstar.py -- http://mew.cx/ 2022-06-04
+# SPDX-FileCopyrightText: 2022 Mike Weiblen
+
 # SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
 # SPDX-License-Identifier: MIT
 
 import time
 import random
 import board
+import atexit
 import adafruit_dotstar as dotstar
 
-# On-board DotStar for boards including Gemma, Trinket, and ItsyBitsy
-dots = dotstar.DotStar(board.APA102_SCK, board.APA102_MOSI, 1, brightness=0.2)
-
-# Using a DotStar Digital LED Strip with 30 LEDs connected to hardware SPI
-# dots = dotstar.DotStar(board.SCK, board.MOSI, 30, brightness=0.2)
-
-# Using a DotStar Digital LED Strip with 30 LEDs connected to digital pins
-# dots = dotstar.DotStar(board.D6, board.D5, 30, brightness=0.2)
-
-
-# HELPERS
-# a random color 0 -> 192
-def random_color():
-    return random.randrange(0, 7) * 32
-
-
-# MAIN LOOP
+# dotstar strip on hardware SPI
+dots = dotstar.DotStar(board.SCK, board.MOSI, 4, brightness=0.1)
 n_dots = len(dots)
+
+def random_color():
+    #return random.randrange(0,8) << 5
+    return random.randrange(0,256)
+
+def clear():
+    for dot in range(n_dots):
+        dots[dot] = (0,0,0)
+
+atexit.register(clear)
+
 while True:
-    # Fill each dot with a random color
     for dot in range(n_dots):
         dots[dot] = (random_color(), random_color(), random_color())
 
