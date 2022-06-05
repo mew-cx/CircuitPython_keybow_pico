@@ -3,7 +3,6 @@
 import board
 import digitalio
 import adafruit_dotstar
-import time
 
 import usb_hid
 
@@ -14,7 +13,8 @@ from adafruit_hid.keycode import Keycode
 from adafruit_hid.consumer_control import ConsumerControl
 from adafruit_hid.consumer_control_code import ConsumerControlCode
 
-pixels = adafruit_dotstar.DotStar(board.GP2, board.GP3,12)
+pixels = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12)
+
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
 
@@ -26,10 +26,7 @@ class KeyLight:
         self.press_string = press_string
         self.press_func = press_func
         self.pressed = False
-        self.set_base_color((self.keynum*20,0,255-(self.keynum*20) , 0.5))
-        self.activate_pin()
-
-    def activate_pin(self):
+        self.set_base_color((self.keynum*20, 0, 255-(self.keynum*20), 0.5))
         self.pin = digitalio.DigitalInOut(self.pinnum)
         self.pin.switch_to_input(pull = digitalio.Pull.UP)
 
