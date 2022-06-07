@@ -11,4 +11,4 @@ def is_hardware_spi(clock_pin, data_pin):
     except ValueError:
         return False
 
-print("is_hardware_spi(board.SCK, board.MOSI):", is_hardware_spi(board.SCK, board.MOSI))
+print("is_hardware_spi(board.GP2, board.GP3) :", is_hardware_spi(board.GP2, board.GP3))
