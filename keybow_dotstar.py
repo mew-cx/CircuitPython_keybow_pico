@@ -11,7 +11,7 @@ import atexit
 import adafruit_dotstar as dotstar
 
 # dotstar strip on hardware SPI
-dots = dotstar.DotStar(board.SCK, board.MOSI, 4, brightness=0.1)
+dots = dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.1)
 n_dots = len(dots)
 
 def random_color():
