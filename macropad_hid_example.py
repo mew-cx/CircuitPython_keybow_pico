@@ -5,7 +5,6 @@ import usb_hid
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.keycode import Keycode
 
-# Key order is left to right, top to bottom.
 KEY_PINS = (
     board.KEY1,
     board.KEY2,
@@ -37,29 +36,24 @@ KEYCODES = (
     Keycode.ENTER,
 )
 
-# Colors for pressend and not-pressed buttons
-ON_COLOR = (0, 0, 255)
-OFF_COLOR = (0, 20, 0)
-
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
 neopixels = neopixel.NeoPixel(board.NEOPIXEL, 12, brightness=0.4)
-neopixels.fill(OFF_COLOR)
 kbd = Keyboard(usb_hid.devices)
 
+ON_COLOR = (0, 0, 255)
+OFF_COLOR = (0, 20, 0)
+neopixels.fill(OFF_COLOR)
+
 while True:
-    # Get the next keypad event, which might be None.
     event = keys.events.get()
     if event:
+        print(event)
         key_number = event.key_number
-        # A key transition occurred.
+
         if event.pressed:
-            # Send the keycode for the key that was pressed.
-            kbd.press(KEYCODES[key_number])
-            # Change its color to give the user feedback.
             neopixels[key_number] = ON_COLOR
+            kbd.press(KEYCODES[key_number])
 
         if event.released:
-            # Indicate that the key has been released.
-            kbd.release(KEYCODES[key_number])
-            # Restore the unpressed color.
             neopixels[key_number] = OFF_COLOR
+            kbd.release(KEYCODES[key_number])
