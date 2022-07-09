@@ -19,6 +19,10 @@ from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 #from adafruit_hid.consumer_control_code import ConsumerControlCode
 
 
+@atexit.register
+def clear():
+    dots.fill(OFF_COLOR)
+
 KEY_PINS = (
     board.GP16,
     board.GP11,
@@ -59,10 +63,6 @@ OFF_COLOR = 0x001800
 dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.1)
 clear()
 #dots.fill(OFF_COLOR)
-
-@atexit.register
-def clear():
-    dots.fill(OFF_COLOR)
 
 while True:
     event = keys.events.get()
