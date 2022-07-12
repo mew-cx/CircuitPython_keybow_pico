@@ -35,18 +35,18 @@ KEY_PINS = (
 )
 
 KEYCODES = (
-    Keycode.NINE,
-    Keycode.SIX,
-    Keycode.THREE,
     Keycode.ZERO,
-    Keycode.BACKSPACE,
-    Keycode.SEVEN,
-    Keycode.FOUR,
+    Keycode.THREE,
+    Keycode.SIX,
+    Keycode.NINE,
     Keycode.ONE,
-    Keycode.ENTER,
-    Keycode.EIGHT,
-    Keycode.FIVE,
+    Keycode.FOUR,
+    Keycode.SEVEN,
+    Keycode.BACKSPACE,
     Keycode.TWO,
+    Keycode.FIVE,
+    Keycode.EIGHT,
+    Keycode.ENTER,
 )
 
 @atexit.register
