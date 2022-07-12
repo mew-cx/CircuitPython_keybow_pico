@@ -63,17 +63,21 @@ OFF_COLOR = 0x001800
 dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.1)
 clear()
 
+def HandleKey(key, is_pressed):
+    if is_pressed:
+        dots[key] = ON_COLOR
+        kbd.press(KEYCODES[key])
+        #layout.write(KEYSTRING[key])
+    else:
+        dots[key] = OFF_COLOR
+        kbd.release(KEYCODES[key])
+
 while True:
     event = keys.events.get()
     if event:
-        print(event)
-        i = event.key_number
-        if event.pressed:
-            dots[i] = ON_COLOR
-            kbd.press(KEYCODES[i])
-            #layout.write(KEYSTRING[i])
-        else:
-            dots[i] = OFF_COLOR
-            kbd.release(KEYCODES[i])
+        print(repr(event))
+        HandleKey(event.key_number, event.pressed)
+    else:
+        pass
 
 # vim: set sw=4 ts=8 et ic ai:
