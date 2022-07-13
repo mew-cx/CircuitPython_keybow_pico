@@ -49,11 +49,6 @@ KEYCODES = (
     Keycode.ENTER,
 )
 
-@atexit.register
-def clear():
-    dots.fill(0)
-
-
 keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
@@ -61,7 +56,11 @@ layout = KeyboardLayoutUS(kbd)
 ON_COLOR = 0x0000ff
 OFF_COLOR = 0x001800
 dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.1)
-clear()
+dots.fill(0xff0000)
+
+@atexit.register
+def clear():
+    dots.fill(0)
 
 def HandleKey(key, is_pressed):
     if is_pressed:
