@@ -4,7 +4,6 @@
 
 # keybow_pico.py -- http://mew.cx/ 2022-07-07
 
-
 import board
 import keypad
 import adafruit_dotstar
@@ -18,38 +17,22 @@ from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 #from adafruit_hid.consumer_control import ConsumerControl
 #from adafruit_hid.consumer_control_code import ConsumerControlCode
 
-
-KEY_PINS = (
-    board.GP16,
-    board.GP11,
-    board.GP9,
-    board.GP7,
-    board.GP17,
-    board.GP18,
-    board.GP26,
-    board.GP8,
-    board.GP14,
-    board.GP12,
-    board.GP10,
-    board.GP27,
+KEYDATA = (
+    ( board.GP16, Keycode.ZERO ),
+    ( board.GP11, Keycode.THREE ),
+    ( board.GP9,  Keycode.SIX ),
+    ( board.GP7,  Keycode.NINE ),
+    ( board.GP17, Keycode.ONE ),
+    ( board.GP18, Keycode.FOUR ),
+    ( board.GP26, Keycode.SEVEN ),
+    ( board.GP8,  Keycode.BACKSPACE ),
+    ( board.GP14, Keycode.TWO ),
+    ( board.GP12, Keycode.FIVE ),
+    ( board.GP10, Keycode.EIGHT ),
+    ( board.GP27, Keycode.ENTER ),
 )
 
-KEYCODES = (
-    Keycode.ZERO,
-    Keycode.THREE,
-    Keycode.SIX,
-    Keycode.NINE,
-    Keycode.ONE,
-    Keycode.FOUR,
-    Keycode.SEVEN,
-    Keycode.BACKSPACE,
-    Keycode.TWO,
-    Keycode.FIVE,
-    Keycode.EIGHT,
-    Keycode.ENTER,
-)
-
-keys = keypad.Keys(KEY_PINS, value_when_pressed=False, pull=True)
+keys = keypad.Keys([i[0] for i in KEYDATA], value_when_pressed=False, pull=True)
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
 
@@ -65,11 +48,11 @@ def clear():
 def HandleKey(key, is_pressed):
     if is_pressed:
         dots[key] = ON_COLOR
-        kbd.press(KEYCODES[key])
+        kbd.press(KEYDATA[key][1])
         #layout.write(KEYSTRING[key])
     else:
         dots[key] = OFF_COLOR
-        kbd.release(KEYCODES[key])
+        kbd.release(KEYDATA[key][1])
 
 while True:
     event = keys.events.get()
