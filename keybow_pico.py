@@ -16,6 +16,9 @@ from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 #from adafruit_hid.consumer_control_code import ConsumerControlCode
 from micropython import const
 
+dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.5)
+dots.fill(0xff0000)
+
 KEYDATA = (
     ( board.GP16, Keycode.ZERO ),
     ( board.GP11, Keycode.THREE ),
@@ -35,30 +38,26 @@ keys = keypad.Keys([i[0] for i in KEYDATA], value_when_pressed=False, pull=True)
 kbd = Keyboard(usb_hid.devices)
 layout = KeyboardLayoutUS(kbd)
 
-ON_COLOR = 0x0000ff
-OFF_COLOR = 0x001800
-dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.1)
-dots.fill(0xff0000)
-
 @atexit.register
 def clear():
     dots.fill(0)
 
-def HandleKey(key, is_pressed):
+def HandleKey(knum, is_pressed):
+    ON_COLOR  = 0x0000ff
+    OFF_COLOR = 0x001800
+    kdata = KEYDATA[knum]
     if is_pressed:
-        dots[key] = ON_COLOR
-        kbd.press(KEYDATA[key][1])
-        #layout.write(KEYSTRING[key])
+        dots[knum] = ON_COLOR
+        kbd.press(kdata[1])
+        #layout.write(KEYSTRING[knum])
     else:
-        dots[key] = OFF_COLOR
-        kbd.release(KEYDATA[key][1])
+        dots[knum] = OFF_COLOR
+        kbd.release(kdata[1])
 
 while True:
     event = keys.events.get()
     if event:
-        print(repr(event))
         HandleKey(event.key_number, event.pressed)
-    else:
-        pass
+    # TODO is this busy-spinning like crazy??
 
 # vim: set sw=4 ts=8 et ic ai:
