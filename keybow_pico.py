@@ -16,8 +16,8 @@ from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
 #from adafruit_hid.consumer_control_code import ConsumerControlCode
 from micropython import const
 
-__version__ = "0.1.0.0"
-__repo__ = "https://github.com/mew-cx/dust_runtime.git"
+__version__ = "0.1.0.1"
+__repo__ = "https://github.com/mew-cx/CircuitPython_keybow_pico"
 
 dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.5)
 dots.fill(0xff0000)
