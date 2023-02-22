@@ -1,0 +1,11 @@
+Windows: gwar brat
+gitdir: C:/mew/gits/dust_runtime_CIRCUITPY/.git
+
+Linux: gwar
+gitdir: /home/mew/repos/gits/github.com/mew-cx/dust_runtime/.git
+
+Linux: dust
+gitdir: /home/pi/gits/dust_runtime_CIRCUITPY/.git
+
+gitdir: D:/usr/repos/gits/dust_runtime_CIRCUITPYTHON.git
+gitdir: /media/mew/SPIN_TMP/usr/repos/gits/dust_runtime_CIRCUITPYTHON.git
