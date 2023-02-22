@@ -16,7 +16,12 @@ __version__ = "0.1.0.1"
 __repo__ = "https://github.com/mew-cx/CircuitPython_keybow_pico"
 
 dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.5)
-dots.fill(0x800000)
+dots.fill(0)
+dots[0] = 0xff00ff
+dots[8] = 0x00ff00
+dots[1] = 0x0000ff
+dots[2] = 0x0000ff
+dots[3] = 0x0000ff
 
 KEYDATA = (
     ( board.GP16, Keycode.ZERO ),
