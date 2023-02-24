@@ -1,37 +1,43 @@
+"keybow_pico"
+Pimoroni 12-key Keybow, with Raspberry Pi Pico replacing
+the original Raspberry Pi Zero.
 
-Need serial API to set LED colors from host system.
+Add: serial API to set LED colors from host system.
+Add: mousejiggler ability
 
-Add mousejiggler ability
+Physical Key/LED numbering:
 
++--------------------------+
+|             K E Y B O W  |
++--------+--------+--------+
+|        |        |        |
+|    0   |    4   |    8   |
+|        |        |        |
++--------+--------+--------+
+|        |        |        |
+|    1   |    5   |    9   |
+|        |        |        |
++--------+--------+--------+
+|        |        |        |
+|    2   |    6   |   10   |
+|        |        |        |
++--------+--------+--------+
+|        |        |        |
+|    3   |    7   |   11   |
+|        |        |        |
++--------+--------+--------+
+           USB
 
-Physical orientation:
-+--------+--------+--------+
-|                  KEYBOW  |
-+--------+--------+--------+
-|        |        |        |
-|    0   |    1   |    2   |
-|        |        |        |
-+--------+--------+--------+
-|        |        |        |
-|    3   |    4   |    5   |
-|        |        |        |
-+--------+--------+--------+
-|        |        |        |
-|    6   |    7   |    8   |
-|        |        |        |
-+--------+--------+--------+
-|        |        |        |
-|    9   |   10   |   11   |
-|        |        |        |
-+--------+--------+--------+
 
  +-----------+
- |    KEYBOW |
- | 0   1   2 |
+ |     KEYBOW|
+ | 0   4   8 |
  |           |
- | 3   4   5 |
+ | 1   5   9 |
  |           |
- | 6   7   8 |
+ | 2   6  10 |
  |           |
- | 9  10  11 |
+ | 3   7  11 |
  +-----------+
+     USB
+
