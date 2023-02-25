@@ -1,13 +1,14 @@
-hinv version : 0.0.3.0
+hinv version : 0.0.5.1		repo : https://github.com/mew-cx/CircuitPython_hinv
 board.board_id : raspberry_pi_pico
 uid : e6611cb697619e28
 len(cpus) : 2 (e6611cb697619e28 e6611cb697619e28)
-sys.implementation : (name='circuitpython', version=(7, 3, 2), mpy=517) MPY_VERSION=5 flags=0x02
+sys.implementation : (name='circuitpython', version=(7, 3, 2), mpy=517) MPY_VERSION=5 flags=0x02 arch=0
 sys.path : ['', '/', '/lib']
 sys.platform : RP2040
 sys.version : 3.4.0
 os.uname() : (sysname='rp2040', nodename='rp2040', release='7.3.2', version='7.3.2 on 2022-07-20', machine='Raspberry Pi Pico with rp2040')
-os.statvfs('/') : (512, 512, 2008, 1946, 1946, 0, 0, 0, 0, 255) 996.4KB of 1028.1KB (96.9%) free
+memory : 196.7KiB free of 204.1KiB total (96.3%)
+storage : 775.0KiB free of 1004.0KiB total (77.2%)
 len(nvm) : 4096
 
 dir(board) :
@@ -70,4 +71,5 @@ bitbangio         micropython       sys
 bitmaptools       msgpack           terminalio
 bitops            neopixel_write    time
 Plus any modules on the filesystem
+# TODO how to redirect help('modules') to output filehandle?
 }
