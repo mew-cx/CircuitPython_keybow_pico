@@ -1,9 +1,11 @@
-# SPDX-FileCopyrightText: 2022 Michael E. Weiblen http://mew.cx/
+# SPDX-FileCopyrightText: 2022-2023 Michael E. Weiblen http://mew.cx/
 #
 # SPDX-License-Identifier: MIT
 
-# keybow_pico.py -- http://mew.cx/ 2023-02-17
+# keybow_pico_cew_editkeys.py -- http://mew.cx/ 2023-02-24
+# A configuration of the 12-key "Keybow Pico" for CEW's editing shortcuts.
 
+#import time
 import board
 import keypad
 import adafruit_dotstar
@@ -11,61 +13,62 @@ import atexit
 import usb_hid
 from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard import Keyboard
+from adafruit_hid.mouse import Mouse
 
-__version__ = "0.1.0.1"
+__version__ = "0.2.0.0"
 __repo__ = "https://github.com/mew-cx/CircuitPython_keybow_pico"
 
-dots = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.5)
-dots.fill(0)
-dots[0] = 0xff00ff
-dots[8] = 0x00ff00
-dots[1] = 0x0000ff
-dots[2] = 0x0000ff
-dots[3] = 0x0000ff
+# Output devices to receive events from this program.
+keybd = Keyboard(usb_hid.devices)
+mouse = Mouse(usb_hid.devices)
+leds  = adafruit_dotstar.DotStar(board.GP2, board.GP3, 12, brightness=0.5)
 
-KEYDATA = (
-    ( board.GP16, Keycode.ZERO ),
-    ( board.GP17, Keycode.ONE ),
-    ( board.GP14, Keycode.TWO ),
-    ( board.GP11, Keycode.THREE ),
-    ( board.GP18, Keycode.FOUR ),
-    ( board.GP12, Keycode.FIVE ),
-    ( board.GP9,  Keycode.SIX ),
-    ( board.GP26, Keycode.SEVEN ),
-    ( board.GP10, Keycode.EIGHT ),
-    ( board.GP7,  Keycode.NINE ),
-    ( board.GP8,  Keycode.BACKSPACE ),
-    ( board.GP27, Keycode.ENTER ),
+# Elements of this table are in Keybow's key/LED order (0-11).
+MODIFIER = Keycode.CONTROL
+KEYINFO = (
+    # GPIO pin     color      pressfunc     relfunc         eventdata                keynumber
+    ( board.GP16,  0xff00ff,  keybd.press,  keybd.release,  [MODIFIER, Keycode.Z]),  #  0
+    ( board.GP11,  0x0000ff,  keybd.press,  keybd.release,  [MODIFIER, Keycode.C]),  #  1
+    ( board.GP9,   0x0000ff,  keybd.press,  keybd.release,  [MODIFIER, Keycode.V]),  #  2
+    ( board.GP7,   0x0000ff,  keybd.press,  keybd.release,  [MODIFIER, Keycode.A]),  #  3
+    ( board.GP17,  0xffff00,  keybd.press,  keybd.release,  [Keycode.BACKSPACE]),    #  4
+    ( board.GP18,  0x777777,  mouse.press,  mouse.release,  [Mouse.RIGHT_BUTTON]),   #  5
+    ( board.GP26,  0xff0000,  keybd.press,  keybd.release,  [Keycode.UP_ARROW]),     #  6
+    ( board.GP8,   0x777777,  mouse.press,  mouse.release,  [Mouse.LEFT_BUTTON]),    #  7
+    ( board.GP14,  0x00ff00,  keybd.press,  keybd.release,  [Keycode.ENTER]),        #  8
+    ( board.GP12,  0xff0000,  keybd.press,  keybd.release,  [Keycode.RIGHT_ARROW]),  #  9
+    ( board.GP10,  0xff0000,  keybd.press,  keybd.release,  [Keycode.DOWN_ARROW]),   # 10
+    ( board.GP27,  0xff0000,  keybd.press,  keybd.release,  [Keycode.LEFT_ARROW])    # 11
 )
 
-keys = keypad.Keys([i[0] for i in KEYDATA], value_when_pressed=False, pull=True)
-kbd = Keyboard(usb_hid.devices)
-
+# At program termination, shutdown cleanly: LEDs off, keys/buttons released.
 @atexit.register
-def clear():
-    dots.fill(0)
+def shutdown():
+    leds.fill(0)
+    keybd.release_all()
+    mouse.release_all()
 
-def HandleKey(knum, is_pressed):
-    ON_COLOR  = 0x0000ff
-    OFF_COLOR = 0x001800
-    MODIFIER = Keycode.CONTROL
+def main():
+    # Assign GPIO pins to keypad keys, and scan @ 50Hz (20mS) for debouncing.
+    keys = keypad.Keys([i[0] for i in KEYINFO], interval=0.02, value_when_pressed=False, pull=True)
 
-    if not is_pressed:
-        kbd.release_all()
-    elif knum == 0:
-        kbd.press(MODIFIER, Keycode.Z)
-    elif knum == 2:
-        kbd.press(Keycode.ENTER)
-    elif knum == 3:
-        kbd.press(MODIFIER, Keycode.C)
-    elif knum == 6:
-        kbd.press(MODIFIER, Keycode.V)
-    elif knum == 9:
-        kbd.press(MODIFIER, Keycode.A)
+    # Set the keypad's LED colors
+    leds.fill(0)
+    for knum,kinfo in enumerate(KEYINFO):
+        leds[knum] = kinfo[1]
 
-while True:
-    event = keys.events.get()
-    if event:
-        HandleKey(event.key_number, event.pressed)
+    while True:
+        event = keys.events.get()
+        if event:
+            kinfo     = KEYINFO[event.key_number]
+            pressfunc = kinfo[2]
+            relfunc   = kinfo[3]
+            eventdata = kinfo[4]
+            if event.pressed:
+                pressfunc(*eventdata)
+            else:
+                relfunc(*eventdata)
+
+main()
 
 # vim: set sw=4 ts=8 et ic ai:
