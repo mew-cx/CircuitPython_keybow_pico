@@ -1,4 +1,2 @@
-#import keybow_pico
+# code.py
 import keybow_pico_cew_editkeys.py
-#import spi_test
-# eof
