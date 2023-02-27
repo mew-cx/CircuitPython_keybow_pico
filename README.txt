@@ -1,4 +1,7 @@
-# keybow_pico
+# "keybow_pico"
+Pimoroni 12-key Keybow, with a Raspberry Pi Pico
+and Red Robotics Pico2Pi adapter board replacing
+the original Raspberry Pi Zero.
 
 ::::::::::::::
 setup.txt
@@ -56,11 +59,10 @@ https://github.com/codepope/KeyBow-Pico-CircuitPython
 https://github.com/adafruit/Adafruit_CircuitPython_HID
 https://github.com/DougieWougie/MouseJiggler
 
-
-TODO
-a communications channel from host to keybow, to permit host control of:
-* LEDs.
-* keybindings
+TODO/Ideas:
+Add: some communications API from host system to set LED colors.
+Add: some communications API from host system to set keybindings.
+Add: mousejiggler ability
 
 =============================================================================
 https://learn.adafruit.com/customizing-usb-devices-in-circuitpython/circuitpy-midi-serial#usb-serial-console-repl-and-data-3096590
@@ -86,7 +88,40 @@ You can list the available usb_cdc.data serial ports using adafruit_board_toolki
 Similarly, to get a list of the usb_cdc.console (REPL) serial ports, use adafruit_board_toolkit.circuitpython.repl_comports().
 
 =============================================================================
+Physical Key/LED numbering:
+
++--------------------------+
+|             K E Y B O W  |
++--------+--------+--------+
+|        |        |        |
+|    0   |    4   |    8   |
+|        |        |        |
++--------+--------+--------+
+|        |        |        |
+|    1   |    5   |    9   |
+|        |        |        |
++--------+--------+--------+
+|        |        |        |
+|    2   |    6   |   10   |
+|        |        |        |
++--------+--------+--------+
+|        |        |        |
+|    3   |    7   |   11   |
+|        |        |        |
++--------+--------+--------+
+         USB
 
 
-=============================================================================
+ +-----------+
+ |     KEYBOW|
+ | 0   4   8 |
+ |           |
+ | 1   5   9 |
+ |           |
+ | 2   6  10 |
+ |           |
+ | 3   7  11 |
+ +-----------+
+     USB
+
 #eof
