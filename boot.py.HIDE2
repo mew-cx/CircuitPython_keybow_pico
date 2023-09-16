@@ -1,6 +1,0 @@
-# turn off the auto-mounting of the CIRCUITPY drive, since that
-# isn't needed for a keyboard.
-
-import storage, os
-#storage.disable_usb_drive()
-storage.remount("/",readonly=True)
