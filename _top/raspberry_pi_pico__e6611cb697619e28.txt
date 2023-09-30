@@ -1,0 +1,76 @@
+hinv version : 0.0.6.0		repo : https://github.com/mew-cx/CircuitPython_hinv
+board.board_id : raspberry_pi_pico
+uid : e6611cb697619e28
+len(cpus) : 2 (e6611cb697619e28 e6611cb697619e28)
+sys.implementation : (name='circuitpython', version=(8, 2, 6), mpy=517) MPY_VERSION=5 flags=0x02 arch=0
+sys.path : ['', '/', '/lib']
+sys.platform : RP2040
+sys.version : 3.4.0
+sys.modules : {'hinv': <module 'hinv' from 'hinv.py'>}
+os.uname() : (sysname='rp2040', nodename='rp2040', release='8.2.6', version='8.2.6 on 2023-09-12', machine='Raspberry Pi Pico with rp2040')
+memory : 181.9KiB free of 190.4KiB total (95.6%)
+storage : 969.0KiB free of 1004.0KiB total (96.5%)
+len(nvm) : 4096
+
+dir(board) :
+['__class__', '__name__', 'A0', 'A1', 'A2', 'A3', 'GP0', 'GP1', 'GP10', 'GP11', 'GP12', 'GP13', 'GP14', 'GP15', 'GP16', 'GP17', 'GP18', 'GP19', 'GP2', 'GP20', 'GP21', 'GP22', 'GP23', 'GP24', 'GP25', 'GP26', 'GP26_A0', 'GP27', 'GP27_A1', 'GP28', 'GP28_A2', 'GP3', 'GP4', 'GP5', 'GP6', 'GP7', 'GP8', 'GP9', 'LED', 'SMPS_MODE', 'STEMMA_I2C', 'VBUS_SENSE', 'VOLTAGE_MONITOR', 'board_id']
+
+PinMap() {
+microcontroller.GPIO0	board.GP0
+microcontroller.GPIO1	board.GP1
+microcontroller.GPIO10	board.GP10
+microcontroller.GPIO11	board.GP11
+microcontroller.GPIO12	board.GP12
+microcontroller.GPIO13	board.GP13
+microcontroller.GPIO14	board.GP14
+microcontroller.GPIO15	board.GP15
+microcontroller.GPIO16	board.GP16
+microcontroller.GPIO17	board.GP17
+microcontroller.GPIO18	board.GP18
+microcontroller.GPIO19	board.GP19
+microcontroller.GPIO2	board.GP2
+microcontroller.GPIO20	board.GP20
+microcontroller.GPIO21	board.GP21
+microcontroller.GPIO22	board.GP22
+microcontroller.GPIO23	board.GP23	board.SMPS_MODE
+microcontroller.GPIO24	board.GP24	board.VBUS_SENSE
+microcontroller.GPIO25	board.GP25	board.LED
+microcontroller.GPIO26	board.A0	board.GP26	board.GP26_A0
+microcontroller.GPIO27	board.A1	board.GP27	board.GP27_A1
+microcontroller.GPIO28	board.A2	board.GP28	board.GP28_A2
+microcontroller.GPIO29	board.A3	board.VOLTAGE_MONITOR
+microcontroller.GPIO3	board.GP3
+microcontroller.GPIO4	board.GP4
+microcontroller.GPIO5	board.GP5
+microcontroller.GPIO6	board.GP6
+microcontroller.GPIO7	board.GP7
+microcontroller.GPIO8	board.GP8
+microcontroller.GPIO9	board.GP9
+}
+help('modules') {
+__future__        bitops            msgpack           sys
+__main__          board             neopixel_write    terminalio
+_asyncio          builtins          nvm               time
+_bleio            busio             onewireio         touchio
+_eve              collections       os                traceback
+_pixelmap         countio           paralleldisplay   ulab
+adafruit_bus_device                 digitalio         picodvi           ulab.numpy
+adafruit_bus_device.i2c_device      displayio         pulseio           ulab.numpy.fft
+adafruit_bus_device.spi_device      errno             pwmio             ulab.numpy.linalg
+adafruit_pixelbuf floppyio          qrio              ulab.scipy
+aesio             fontio            rainbowio         ulab.scipy.linalg
+alarm             framebufferio     random            ulab.scipy.optimize
+analogbufio       gc                re                ulab.scipy.signal
+analogio          getpass           rgbmatrix         ulab.scipy.special
+array             gifio             rotaryio          ulab.utils
+atexit            i2cperipheral     rp2pio            usb_cdc
+audiobusio        i2ctarget         rtc               usb_hid
+audiocore         imagecapture      sdcardio          usb_midi
+audiomixer        io                select            uselect
+audiomp3          json              sharpdisplay      vectorio
+audiopwmio        keypad            storage           watchdog
+binascii          math              struct            zlib
+bitbangio         microcontroller   supervisor
+bitmaptools       micropython       synthio
+Plus any modules on the filesystem
+}

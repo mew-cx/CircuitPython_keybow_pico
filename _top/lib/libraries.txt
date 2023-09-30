@@ -1,0 +1,2 @@
+adafruit_dotstar
+adafruit_hid
