@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: MIT
 
-# mew-cx/CircuitPython_keybow_pico/keybow_pico_cew_editkeys.py -- http://mew.cx 2023-09-16
+# mew-cx/CircuitPython_keybow_pico/keybow_pico_cew_editkeys.py -- http://mew.cx 2023-10-09
 #
 # The "keybow_pico" is a Pimoroni 12-key Keybow which replaces the original
 # RaspberryPi Zero with a RaspberryPi Pico using a Red Robotics Pico2Pi
@@ -20,7 +20,7 @@ from adafruit_hid.keycode import Keycode
 from adafruit_hid.keyboard import Keyboard
 from adafruit_hid.mouse import Mouse
 
-__version__ = "0.2.5.5"
+__version__ = "0.2.5.6"
 __repo__ = "https://github.com/mew-cx/CircuitPython_keybow_pico.git"
 __board_id__ = "raspberry_pi_pico"    # board.board_id
 __impl_name__ = "circuitpython"       # sys.implementation.name
@@ -87,11 +87,11 @@ def main():
         leds[i] = kdata[1]
 
     # Process key events forever
+    _event = keypad.Event()     # a single event to reuse
     while True:
-        event = keys.events.get()
-        if event is not None:
-            _, _, pressfunc, relfunc, eventdata = KEYDATA[event.key_number]
-            if event.pressed:
+        if keys.events.get_into(_event) is not None:
+            _, _, pressfunc, relfunc, eventdata = KEYDATA[_event.key_number]
+            if _event.pressed:
                 pressfunc(*eventdata)
             else:
                 relfunc(*eventdata)
